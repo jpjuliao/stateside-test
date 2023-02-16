@@ -3,7 +3,7 @@
  * The main template file
  */
 
-get_header(); ?>
+get_header();?>
 
 <div id="map"></div>
 

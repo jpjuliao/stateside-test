@@ -5,7 +5,7 @@
   "author": "Juan Pablo Juliao",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc index.ts --watch",
+    "dev": "tsc --watch",
     "build": "tsc index.ts ./stateside-wp-theme/index.js"
   },
   "devDependencies": {

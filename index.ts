@@ -6,8 +6,8 @@ function initMap(): void {
     {
       center: chicago,
       zoom: 3,
-    }
-  );
+    } 
+  ); 
 
   const coordInfoWindow = new google.maps.InfoWindow();
 
@@ -72,4 +72,4 @@ declare global {
 }
 window.initMap = initMap;
 
-export { };
+
