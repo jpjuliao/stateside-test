@@ -1,4 +1,3 @@
-"use strict";
 function initMap() {
     const chicago = new google.maps.LatLng(41.85, -87.65);
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -39,3 +38,4 @@ function project(latLng) {
     return new google.maps.Point(TILE_SIZE * (0.5 + latLng.lng() / 360), TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
 }
 window.initMap = initMap;
+export {};

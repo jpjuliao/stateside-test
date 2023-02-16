@@ -72,4 +72,4 @@ declare global {
 }
 window.initMap = initMap;
 
-
+export {}

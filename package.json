@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "author": "Juan Pablo Juliao",
+  "type":"module",
   "license": "MIT",
   "scripts": {
     "dev": "tsc --watch",
