@@ -1,4 +1,5 @@
 function initMap(): void {
+
   const chicago = new google.maps.LatLng(41.85, -87.65);
 
   const map = new google.maps.Map(
@@ -6,8 +7,14 @@ function initMap(): void {
     {
       center: chicago,
       zoom: 3,
-    } 
-  ); 
+    }
+  );
+
+  new google.maps.Marker({
+    position: { lat: 25.363, lng: 131.044 },
+    map,
+    title: "Hello World!",
+  });
 
   const coordInfoWindow = new google.maps.InfoWindow();
 
@@ -25,6 +32,12 @@ function initMap(): void {
 
 const TILE_SIZE = 256;
 
+/**
+ * Create Info Window Content
+ * @param latLng 
+ * @param zoom 
+ * @returns 
+ */
 function createInfoWindowContent(latLng: google.maps.LatLng, zoom: number) {
   const scale = 1 << zoom;
 
@@ -72,4 +85,4 @@ declare global {
 }
 window.initMap = initMap;
 
-export {}
+export { }

@@ -4,6 +4,11 @@ function initMap() {
         center: chicago,
         zoom: 3,
     });
+    new google.maps.Marker({
+        position: { lat: 25.363, lng: 131.044 },
+        map,
+        title: "Hello World!",
+    });
     const coordInfoWindow = new google.maps.InfoWindow();
     coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()));
     coordInfoWindow.setPosition(chicago);
@@ -14,6 +19,12 @@ function initMap() {
     });
 }
 const TILE_SIZE = 256;
+/**
+ * Create Info Window Content
+ * @param latLng
+ * @param zoom
+ * @returns
+ */
 function createInfoWindowContent(latLng, zoom) {
     const scale = 1 << zoom;
     const worldCoordinate = project(latLng);
