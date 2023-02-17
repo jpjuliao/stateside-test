@@ -1,7 +1,5 @@
 <?php
 
-define('API_KEY', getenv('API_KEY'));
-
 /**
  * Enqueue styles.
  */
