@@ -22,6 +22,7 @@ services:
     volumes:
       - ./user-map-locations-wp-theme:/var/www/html/wp-content/themes/user-map-locations-wp-theme
       - wordpress:/var/www/html
+      # - ./php.ini:/usr/local/etc/php/conf.d/php.ini
       # - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
       - 80:80
