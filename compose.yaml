@@ -18,8 +18,10 @@ services:
       - 33060
   wordpress:
     image: wordpress:latest
+    user: 1000:1000
     volumes:
-      - ./stateside-wp-theme:/var/www/html/wp-content/themes/stateside-wp-theme
+      - ./user-map-locations-wp-theme:/var/www/html/wp-content/themes/user-map-locations-wp-theme
+      - wordpress:/var/www/html
       # - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
       - 80:80
@@ -29,13 +31,33 @@ services:
       - WORDPRESS_DB_USER=wordpress
       - WORDPRESS_DB_PASSWORD=wordpress
       - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DEBUG=TRUE
       - WORDPRESS_CONFIG_EXTRA= 
         /* Google Maps API Key */
         define('API_KEY', 'AIzaSyCvlZ1r79q_QJwaDRU0KWbe466WV8pemR4' );
     env_file:
       - .env.local
+  wpcli:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli
+    user: 1000:1000
+    command: >
+      /bin/sh -c '
+      sleep 10;
+      wp core install --path="/var/www/html" --url="http://localhost" --title="Local Wordpress By Docker" --admin_user=admin --admin_password=1234 --admin_email=foo@bar.com
+      '
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
 volumes:
   db_data:
+  wordpress:
 
   
     

@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Enqueue styles.
+ * Enqueue scripts and styles.
+ * @return void
  */
-function stateside_styles()
+function enqueue_scripts()
 {
 
   $theme_version = wp_get_theme()->get('Version');
@@ -25,16 +26,16 @@ function stateside_styles()
   );
 }
 
-add_action('wp_enqueue_scripts', 'stateside_styles');
+add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
 /**
- * Add type="module" to scripts
- * 
+ * Add module type to scripts
  * @param $tag string
  * @param $handle string
  * @param $src string
+ * @return string script tag
  */
-function script_add_type_module($tag, $handle, $src)
+function script_add_type_module(string $tag, string $handle, string $src)
 {
 
   if ('main-script' !== $handle) {

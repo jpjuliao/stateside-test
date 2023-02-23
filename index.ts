@@ -7,6 +7,7 @@ function initMap(): void {
     {
       center: chicago,
       zoom: 3,
+      mapId: '349d3cf7c41b2197' 
     }
   );
 

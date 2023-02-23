@@ -3,6 +3,7 @@ function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
         center: chicago,
         zoom: 3,
+        mapId: '349d3cf7c41b2197'
     });
     new google.maps.Marker({
         position: { lat: 25.363, lng: 131.044 },
