@@ -3,52 +3,43 @@
 class File_Manager
 {
 
-	function upload_file_by_url($image_url)
+	/**
+	 * Upload File
+	 * @param string $file file
+	 * @param string $parent_post_id
+	 * @return string attachment id
+	 */
+	function upload_file($file, $parent_post_id)
 	{
-
-		// it allows us to use download_url() and wp_handle_sideload() functions
 		require_once(ABSPATH . 'wp-admin/includes/file.php');
 
-		// download to temp dir
-		$temp_file = download_url($image_url);
-
-		if (is_wp_error($temp_file)) {
-			return false;
+		if (empty($file)) {
+			wp_die('No files selected.');
 		}
 
-		// move the temp file into the uploads directory
-		$file = array(
-			'name'     => basename($image_url),
-			'type'     => mime_content_type($temp_file),
-			'tmp_name' => $temp_file,
-			'size'     => filesize($temp_file),
-		);
-		$sideload = wp_handle_sideload(
+		$upload = wp_handle_upload(
 			$file,
-			array(
-				'test_form'   => false // no needs to check 'action' parameter
-			)
+			array('test_form' => false)
 		);
 
-		if (!empty($sideload['error'])) {
-			// you may return error message if you want
-			return false;
+		if (!empty($upload['error'])) {
+			wp_die($upload['error']);
 		}
 
-		// it is time to add our uploaded image into WordPress media library
 		$attachment_id = wp_insert_attachment(
 			array(
-				'guid'           => $sideload['url'],
-				'post_mime_type' => $sideload['type'],
-				'post_title'     => basename($sideload['file']),
+				'guid'           => $upload['url'],
+				'post_mime_type' => $upload['type'],
+				'post_title'     => basename($upload['file']),
 				'post_content'   => '',
 				'post_status'    => 'inherit',
 			),
-			$sideload['file']
+			$upload['file'],
+			$parent_post_id
 		);
 
 		if (is_wp_error($attachment_id) || !$attachment_id) {
-			return false;
+			wp_die('Upload error.');
 		}
 
 		// update medatata, regenerate image sizes
@@ -56,7 +47,7 @@ class File_Manager
 
 		wp_update_attachment_metadata(
 			$attachment_id,
-			wp_generate_attachment_metadata($attachment_id, $sideload['file'])
+			wp_generate_attachment_metadata($attachment_id, $upload['file'])
 		);
 
 		return $attachment_id;
@@ -68,7 +59,7 @@ class File_Manager
 	 * @param string filepath
 	 * @return array
 	 */
-	function handle_csv_file($file)
+	function parse_csv($file)
 	{
 		$row = 1;
 		if (($handle = fopen($file, "r")) !== FALSE) {
@@ -88,19 +79,6 @@ class File_Manager
 			fclose($handle);
 
 			return $content;
-
-			// $post_id = wp_insert_post(array(
-			// 	'post_status'   => 'publish',
-			// 	'post_type' => 'submission',
-			// ));
-
-			// update_post_meta($post_id, '_raw_data', maybe_serialize($content));
-
-			// if ($post_id) {
-			// 	wp_redirect(get_permalink($post_id));
-			// } else {
-			// 	wp_redirect(home_url());
-			// }
 		}
 	}
 }

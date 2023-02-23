@@ -6,16 +6,25 @@ function initMap(): void {
     document.getElementById("map") as HTMLElement,
     {
       center: chicago,
-      zoom: 3,
-      mapId: '349d3cf7c41b2197' 
+      zoom: 8,
+      mapId: '349d3cf7c41b2197'
     }
   );
 
-  new google.maps.Marker({
-    position: { lat: 25.363, lng: 131.044 },
-    map,
-    title: "Hello World!",
-  });
+  fetch(window.location.href + '&json=true')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach((item : any, i : number) => {
+        // console.log(item[6], parseFloat(item[6]))
+        // return
+        if (i === 0) return
+        new google.maps.Marker({
+          position: { lat: parseFloat(item[6]), lng: parseFloat(item[7]) },
+          map,
+          title: `${item[0]} ${item[1]} ${item[2]} ${item[3]} ${item[9]}  `,
+        });
+      })
+    })
 
   const coordInfoWindow = new google.maps.InfoWindow();
 

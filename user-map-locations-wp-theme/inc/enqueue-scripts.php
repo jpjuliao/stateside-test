@@ -19,6 +19,12 @@ function enqueue_scripts()
   );
 
   wp_enqueue_style(
+    'picocss',
+    'https://unpkg.com/@picocss/pico@1.*/css/pico.min.css',
+    array()
+  );
+  
+  wp_enqueue_style(
     'main-style',
     get_template_directory_uri() . '/style.css',
     array(),

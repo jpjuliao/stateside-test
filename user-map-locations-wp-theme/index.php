@@ -5,12 +5,14 @@
 
 get_header();?>
 
-<h1>Share your favorites airports</h1>
-<form action="" method="post" enctype="multipart/form-data">
-  <input type="file" name="cvs-file">
-  <input type="submit" value="Submit">
-</form>
+<div class="container">
 
-<div id="map"></div>
+  <h1>Share your favorites airports</h1>
+  <form action="" method="post" enctype="multipart/form-data">
+    <input type="file" name="csv-file">
+    <input type="submit" value="Submit">
+  </form>
+
+</div>
 
 <?php get_footer();
