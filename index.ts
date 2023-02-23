@@ -15,8 +15,6 @@ function initMap(): void {
     .then(res => res.json())
     .then(data => {
       data.forEach((item : any, i : number) => {
-        // console.log(item[6], parseFloat(item[6]))
-        // return
         if (i === 0) return
         new google.maps.Marker({
           position: { lat: parseFloat(item[6]), lng: parseFloat(item[7]) },
@@ -26,18 +24,18 @@ function initMap(): void {
       })
     })
 
-  const coordInfoWindow = new google.maps.InfoWindow();
+  // const coordInfoWindow = new google.maps.InfoWindow();
 
-  coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()!));
-  coordInfoWindow.setPosition(chicago);
-  coordInfoWindow.open(map);
+  // coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()!));
+  // coordInfoWindow.setPosition(chicago);
+  // coordInfoWindow.open(map);
 
-  map.addListener("zoom_changed", () => {
-    coordInfoWindow.setContent(
-      createInfoWindowContent(chicago, map.getZoom()!)
-    );
-    coordInfoWindow.open(map);
-  });
+  // map.addListener("zoom_changed", () => {
+  //   coordInfoWindow.setContent(
+  //     createInfoWindowContent(chicago, map.getZoom()!)
+  //   );
+  //   coordInfoWindow.open(map);
+  // });
 }
 
 const TILE_SIZE = 256;

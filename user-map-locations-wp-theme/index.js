@@ -9,8 +9,6 @@ function initMap() {
         .then(res => res.json())
         .then(data => {
         data.forEach((item, i) => {
-            // console.log(item[6], parseFloat(item[6]))
-            // return
             if (i === 0)
                 return;
             new google.maps.Marker({
@@ -20,14 +18,16 @@ function initMap() {
             });
         });
     });
-    const coordInfoWindow = new google.maps.InfoWindow();
-    coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()));
-    coordInfoWindow.setPosition(chicago);
-    coordInfoWindow.open(map);
-    map.addListener("zoom_changed", () => {
-        coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()));
-        coordInfoWindow.open(map);
-    });
+    // const coordInfoWindow = new google.maps.InfoWindow();
+    // coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()!));
+    // coordInfoWindow.setPosition(chicago);
+    // coordInfoWindow.open(map);
+    // map.addListener("zoom_changed", () => {
+    //   coordInfoWindow.setContent(
+    //     createInfoWindowContent(chicago, map.getZoom()!)
+    //   );
+    //   coordInfoWindow.open(map);
+    // });
 }
 const TILE_SIZE = 256;
 /**
